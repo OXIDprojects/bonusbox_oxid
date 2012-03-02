@@ -1,3 +1,4 @@
-# oxid module documentation
+# bonusbox oxid module
 
-Please add documentation to the [wiki](https://github.com/bonusboxme/oxid/wiki).
+If you have questions, please have a look at our [wiki](https://github.com/bonusboxme/oxid/wiki).
+You can ask questions for integrations in our [campfire chat](https://bonusbox.campfirenow.com/76f5d), if anything else comes up.
