@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<OX>
+	<OXMENU id="NAVIGATION_ESHOPADMIN">
+		<MAINMENU id="MO_BONUSBOX__MENU_MAIN">
+			<SUBMENU id="MO_BONUSBOX__MENU_CONFIG" cl="mo_bonusbox__config"></SUBMENU>
+		</MAINMENU>
+	</OXMENU>
+</OX>
