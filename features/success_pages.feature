@@ -10,7 +10,7 @@ Feature: Collecting user data
     | 124 |        2 | item     |  2000 |     1900 |
     | 225 |        1 | shipping |   499 |     1900 |
     When the checkout was successful
-    Then the oxid plugin sends the cart information like this curl call:
+    Then the oxid plugin sends the cart like this curl call:
     """
     curl -H "Accept: application/json,application/vnd.api;ver=1" \
          -X POST https://api.bonusbox.me/success_pages \
