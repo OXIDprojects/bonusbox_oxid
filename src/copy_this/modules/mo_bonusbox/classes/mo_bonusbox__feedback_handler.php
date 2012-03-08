@@ -30,6 +30,8 @@ class mo_bonusbox__feedback_handler
   {
     $result = json_decode($result, true);
     
+    $this->checkForErrors($result);
+    
     foreach($flatIndexes as $index)
     {
       $result = $this->flattenResult($result, $index);
@@ -46,29 +48,36 @@ class mo_bonusbox__feedback_handler
   public function handleGetBadges($result)
   {
     $result = $this->decodeResult($result, array('badge'));
-    
-    if ($error = $this->getError($result))
-    {
-      return $error;
-    }
-    
+
     return $result['badge'];
   }
   
   /**
-   * extract errors from response
-   *
+   * handle API-call getCoupons
+   * 
    * @param type $result
    * @return type 
    */
-  protected function getError($result)
+  public function handleGetCoupons($result)
   {
-    if(empty($result['error']))
+    $result = $this->decodeResult($result);
+
+    return $result['coupon'];
+  }
+  
+  /**
+   * check for errors in response
+   *
+   * @param type $result
+   */
+  protected function checkForErrors($result)
+  {
+    if (!empty($result['error']))
     {
-      return false;
+      $exception = new mo_bonusbox__exception__feedback_error();
+      $exception->setErrorResponse($result['error']);
+      throw $exception;
     }
-    
-    return array('error' => 'Bonusbox Error "' . $result['error']['type'] . '": ' . $result['error']['message']);
   }
   
   /**

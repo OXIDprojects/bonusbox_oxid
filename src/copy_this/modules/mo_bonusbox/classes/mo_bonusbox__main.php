@@ -15,6 +15,7 @@ class mo_bonusbox__main
   protected $feedbackHandler = null;
   protected $client = null;
   protected $interface = null;
+  protected $helper = null;
   
   /**
    * singleton accessor
@@ -136,6 +137,19 @@ class mo_bonusbox__main
       $this->interface = new mo_bonusbox__interface($this->getClient(), $this->getFeedbackHandler(), $this->getParamBuilder(), $this->getLogger());
     }
     return $this->interface;
+  }
+  
+  /**
+   * getter for helper
+   * @return type 
+   */
+  public function getHelper()
+  {
+    if (is_null($this->helper))
+    {
+      $this->helper = new mo_bonusbox__helper();
+    }
+    return $this->helper;
   }
 
   /**

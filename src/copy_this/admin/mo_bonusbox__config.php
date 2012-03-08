@@ -35,25 +35,17 @@ class mo_bonusbox__config extends Shop_Config
       return array();
     }
     
-    $badges = $bonusboxHandler->getInterface()->getBadges(true);
-    
-    if(!empty($badges['error']))
+    try
     {
-      $this->addAdminError($badges['error']);
+      $badges = $bonusboxHandler->getInterface()->getBadges();
+    }
+    catch(mo_bonusbox__exception__feedback_error $e)
+    {
+      oxUtilsView::getInstance()->addErrorToDisplay((string)$e);
       return array();
     }
     
     return $badges;
-  }
-  
-  /**
-   * add errors to display
-   *
-   * @param type $result 
-   */
-  protected function addAdminError($error)
-  {
-    oxUtilsView::getInstance()->addErrorToDisplay($error);
   }
   
   /**
