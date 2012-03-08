@@ -22,10 +22,11 @@ class mo_bonusbox__config extends Shop_Config
   public function render()
   {
     $this->_aViewData['mo_bonusbox__config'] = $this->getConfig()->getShopConfVar('mo_bonusbox__config');
+    $this->_aViewData['mo_bonusbox__badges'] = $this->mo_bonusbox__getBadgeInfo();
     return $this->_sThisTemplate;
   }
   
-  public function mo_bonusbox__getBadgeInfo()
+  protected function mo_bonusbox__getBadgeInfo()
   {
     $bonusboxHandler = mo_bonusbox__main::getInstance();
     
@@ -36,7 +37,23 @@ class mo_bonusbox__config extends Shop_Config
     
     $badges = $bonusboxHandler->getInterface()->getBadges(true);
     
+    if(!empty($badges['error']))
+    {
+      $this->addAdminError($badges['error']);
+      return array();
+    }
+    
     return $badges;
+  }
+  
+  /**
+   * add errors to display
+   *
+   * @param type $result 
+   */
+  protected function addAdminError($error)
+  {
+    oxUtilsView::getInstance()->addErrorToDisplay($error);
   }
   
   /**

@@ -15,10 +15,8 @@ class mo_bonusbox__feedback_handler
    * @param type $oxSession
    * @param mo_bonusbox__logger $logger 
    */
-  public function __construct($oxConfig, $oxSession, mo_bonusbox__logger $logger)
+  public function __construct(mo_bonusbox__logger $logger)
   {
-    $this->oxConfig = $oxConfig;
-    $this->oxSession = $oxSession;
     $this->logger = $logger;
   }
   
@@ -45,30 +43,16 @@ class mo_bonusbox__feedback_handler
    * @param type $result
    * @return type 
    */
-  public function handleGetBadges($result, $isAdmin)
+  public function handleGetBadges($result)
   {
     $result = $this->decodeResult($result, array('badge'));
     
     if ($error = $this->getError($result))
     {
-      if($isAdmin)
-      {
-        $this->addAdminError($error);
-      }
-      return array();
+      return $error;
     }
     
     return $result['badge'];
-  }
-  
-  /**
-   * add errors to display in admin area
-   *
-   * @param type $result 
-   */
-  protected function addAdminError($error)
-  {
-    oxUtilsView::getInstance()->addErrorToDisplay('Bonusbox Error "' . $error['type'] . '": ' . $error['message']);
   }
   
   /**
@@ -84,7 +68,7 @@ class mo_bonusbox__feedback_handler
       return false;
     }
     
-    return $result['error'];
+    return array('error' => 'Bonusbox Error "' . $result['error']['type'] . '": ' . $result['error']['message']);
   }
   
   /**

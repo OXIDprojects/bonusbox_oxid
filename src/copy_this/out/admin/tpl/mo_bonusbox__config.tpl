@@ -65,7 +65,7 @@
       </td>
     </tr>
     
-    [{foreach from=$oView->mo_bonusbox__getBadgeInfo() item="badgeInfo"}]
+    [{foreach from=$mo_bonusbox__badges item="badgeInfo"}]
       <tr>
         <td valign="top" class="edittext" width="250" nowrap="">
           Title: [{$badgeInfo.title}]

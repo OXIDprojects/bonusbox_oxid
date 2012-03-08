@@ -105,7 +105,7 @@ class mo_bonusbox__main
   {
     if(is_null($this->feedbackHandler))
     {
-      $this->feedbackHandler = new mo_bonusbox__feedback_handler($this->oxConfig, $this->oxSession, $this->getLogger());
+      $this->feedbackHandler = new mo_bonusbox__feedback_handler($this->getLogger());
     }
     return $this->feedbackHandler;
   }
