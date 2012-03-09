@@ -12,7 +12,8 @@ class mo_bonusbox__oxbasket extends mo_bonusbox__oxbasket_parent
 {
   /**
    * @extend addVoucher
-   * override voucher handling for bonusbox coupons
+   * override voucher handling for bonusbox coupons, retrieve voucherseries by ID and
+   * create adhoc voucher
    * @param type $sVoucherId 
    */
   public function addVoucher($sVoucherId)
