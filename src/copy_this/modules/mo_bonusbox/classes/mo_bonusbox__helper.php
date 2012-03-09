@@ -28,4 +28,9 @@ class mo_bonusbox__helper
   {
     return 'mo_bonusbox__' . $badgeId;
   }
+  
+  public function getVoucherSeriesTitleByBadgeTitle($badgeTitle)
+  {
+    return 'Bonusbox: ' . $badgeTitle;
+  }
 }
