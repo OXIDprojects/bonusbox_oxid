@@ -21,6 +21,11 @@ class mo_bonusbox__helper
       return false;
     }
     
-    return 'mo_bonusbox__' . $response['coupon']['user']['badge']['id'];
+    return $this->getVoucherSeriesIdByBadgeId($response['coupon']['user']['badge']['id']);
+  }
+  
+  public function getVoucherSeriesIdByBadgeId($badgeId)
+  {
+    return 'mo_bonusbox__' . $badgeId;
   }
 }
