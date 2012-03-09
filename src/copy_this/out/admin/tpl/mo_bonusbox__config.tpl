@@ -65,7 +65,9 @@
       </td>
     </tr>
     
-    [{foreach from=$mo_bonusbox__badges item="badgeInfo"}]
+    <tr>
+    <table>
+      [{foreach from=$mo_bonusbox__badges item="badgeInfo"}]
       <tr>
         <td valign="top" class="edittext" width="250" nowrap="">
           Title: [{$badgeInfo.title}]
@@ -73,14 +75,19 @@
         <td valign="top" class="edittext">
           Benefit: [{$badgeInfo.benefit}]
         </td>
+        [{if ($oView->mo_bonusbox__getAssignedVoucherseries($badgeInfo)) }]
+          <td valign="top" class="edittext" style="background-color: green;">
+            Coupon assigned
+          </td>
+        [{else}]
+          <td valign="top" class="edittext">
+            Coupon not assigned
+          </td>
+        [{/if}]
       </tr>
     [{/foreach}]
-    
-    <tr>
-      <td colspan="2" valign="top" class="edittext" width="250" nowrap=""><hr /></td>
-    </tr>
-    
-    
+    </table>
+    </tr>    
 
   </table>
 
