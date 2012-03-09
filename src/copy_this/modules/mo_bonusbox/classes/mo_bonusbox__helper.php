@@ -16,12 +16,12 @@ class mo_bonusbox__helper
    */
   public function getVoucherSeriesIdByGetCouponResponse($response)
   {
-    if(empty($response['coupon']['user']['badge']['id']))
+    if(empty($response['user']['badge']['id']))
     {
       return false;
     }
     
-    return $this->getVoucherSeriesIdByBadgeId($response['coupon']['user']['badge']['id']);
+    return $this->getVoucherSeriesIdByBadgeId($response['user']['badge']['id']);
   }
   
   public function getVoucherSeriesIdByBadgeId($badgeId)

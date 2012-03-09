@@ -18,17 +18,33 @@ class mo_bonusbox__oxbasket extends mo_bonusbox__oxbasket_parent
   public function addVoucher($sVoucherId)
   {
     $bonusboxHandler = mo_bonusbox__main::getInstance();
-    if(!$bonusboxHandler->isActive)
+    if(!$bonusboxHandler->isActive())
     {
       return parent::addVoucher($sVoucherId);
     }
     
-    $response = $bonusboxHandler->getInterface()->getCoupons();
+    try
+    {
+      $response = $bonusboxHandler->getInterface()->getCoupons();
+    }
+    catch(Exception $e)
+    {
+      return parent::addVoucher($sVoucherId);
+    }
     
     if(!$voucherSeriesId = $bonusboxHandler->getHelper()->getVoucherSeriesIdByGetCouponResponse($response))
     {
       return parent::addVoucher($sVoucherId);
     }
-    
+
+    $voucherSeries = oxNew('oxVoucherSerie');
+    if(!$voucherSeries->load($voucherSeriesId))
+    {
+      return parent::addVoucher($sVoucherId);
+    }
+
+    //generate new voucher and add
+    $voucherSeries->mo_bonusbox__generateVoucher($sVoucherId);
+    return parent::addVoucher($sVoucherId);
   }
 }
