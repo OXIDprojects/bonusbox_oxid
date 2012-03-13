@@ -66,4 +66,16 @@ class mo_bonusbox__interface
     //handle feedback
     return $this->feedbackHandler->handleGetCoupons($result);
   }
+  
+  public function createSuccessPages(oxBasket $oxbasket)
+  {
+    //fetch params
+    $params = $this->paramBuilder->buildCreateSuccessPages($oxbasket);
+
+    //call service
+    $result = $this->client->callService($params);
+
+    //handle feedback
+    return $this->feedbackHandler->handleCreateSuccessPages($result);
+  }
 }

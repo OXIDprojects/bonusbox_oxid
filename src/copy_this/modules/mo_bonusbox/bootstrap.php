@@ -13,10 +13,7 @@ function mo_bonusbox__autoload($class)
       'mo_bonusbox__main' => '/classes/mo_bonusbox__main.php',
       'mo_bonusbox__param_builder' => '/classes/mo_bonusbox__param_builder.php',
       'mo_bonusbox__helper' => '/classes/mo_bonusbox__helper.php',
-      
       'mo_bonusbox__exception__feedback_error' => '/classes/exceptions/mo_bonusbox__exception__feedback_error.php',
-      
-      
       );
   
   $cn = strtolower($class);

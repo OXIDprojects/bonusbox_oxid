@@ -1,3 +1,4 @@
 oxbasket => mo_bonusbox/core/mo_bonusbox__oxbasket
-oxvoucherserie => mo_bonusbox/core/mo_bonusbox__oxvoucherserie
 oxvoucher => mo_bonusbox/core/mo_bonusbox__oxvoucher
+oxvoucherserie => mo_bonusbox/core/mo_bonusbox__oxvoucherserie
+thankyou => mo_bonusbox/views/mo_bonusbox__thankyou

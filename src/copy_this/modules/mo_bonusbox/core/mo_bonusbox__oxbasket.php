@@ -48,4 +48,20 @@ class mo_bonusbox__oxbasket extends mo_bonusbox__oxbasket_parent
     $voucherSeries->mo_bonusbox__generateVoucher($sVoucherId);
     return parent::addVoucher($sVoucherId);
   }
+  
+  /**
+   * iterate through simple (!) vouchers (stdClass) and check for bonusbox-status
+   * @return boolean 
+   */
+  public function mo_bonusbox__hasBonusboxVoucher()
+  {
+    foreach($this->getVouchers() as $voucher)
+    {
+      if($voucher->mo_bonusbox__is_bonus_voucher)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 }

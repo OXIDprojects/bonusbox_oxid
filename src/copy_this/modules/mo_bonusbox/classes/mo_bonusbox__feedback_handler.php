@@ -66,6 +66,19 @@ class mo_bonusbox__feedback_handler
   }
   
   /**
+   * handle API-call createSuccessPages
+   * 
+   * @param type $result
+   * @return type 
+   */
+  public function handleCreateSuccessPages($result)
+  {
+    $result = $this->decodeResult($result);
+
+    return $result['success_page'];
+  }
+  
+  /**
    * check for errors in response
    *
    * @param type $result
