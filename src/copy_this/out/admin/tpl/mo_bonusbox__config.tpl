@@ -70,20 +70,25 @@
       [{foreach from=$mo_bonusbox__badges item="badgeInfo"}]
       <tr>
         <td valign="top" class="edittext" width="250" nowrap="">
-          Title: [{$badgeInfo.title}]
+          [{ oxmultilang ident="MO_BONUSBOX__BADGE_TITLE" }] [{$badgeInfo.title}]
         </td>
         <td valign="top" class="edittext">
-          Benefit: [{$badgeInfo.benefit}]
+          [{ oxmultilang ident="MO_BONUSBOX__BADGE_BENEFIT" }] [{$badgeInfo.benefit}]
         </td>
         [{if ($oView->mo_bonusbox__getAssignedVoucherseries($badgeInfo)) }]
           <td valign="top" class="edittext" style="background-color: green;">
-            Coupon assigned
+            [{ oxmultilang ident="MO_BONUSBOX__COUPONSERIES_ACTIVE" }]
           </td>
         [{else}]
-          <td valign="top" class="edittext">
-            Coupon not assigned
+          <td valign="top" class="edittext" style="background-color: red;">
+            [{ oxmultilang ident="MO_BONUSBOX__COUPONSERIES_INACTIVE" }]
           </td>
         [{/if}]
+          <td valign="top" class="edittext">
+            <a href="[{$oViewConf->getSelfLink()}]cl=voucherserie&oxid=[{$oView->mo_bonusbox__getVoucherSeriesId($badgeInfo.id)}]" target="basefrm" onclick="_homeExpAct('nav-1-2','nav-1-2-5');">
+              [{ oxmultilang ident="MO_BONUSBOX__COUPONSERIES_EDIT" }]
+            </a>
+          </td>
       </tr>
     [{/foreach}]
     </table>
@@ -93,6 +98,14 @@
 
   <input type="hidden" name="fnc" value="save">
 </form>
+
+<script type="text/javascript">
+  <!--
+  function _homeExpAct(mnid,sbid){
+    top.navigation.adminnav._navExtExpAct(mnid,sbid);
+  }
+  //-->
+</script>
 
 [{include file="bottomnaviitem.tpl"}]
 
