@@ -381,7 +381,7 @@ class mo_bonusbox__param_builder
   {
     $oxorder = oxNew('oxorder');
     $oxorder->load($oxbasket->getOrderId());
-    return $oxbasket->oxorder__oxordernr->value;
+    return $oxorder->oxorder__oxordernr->value;
     
   }
 }
