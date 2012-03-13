@@ -13,35 +13,37 @@ class mo_bonusbox__thankyou extends mo_bonusbox__thankyou_parent
   {
     $return = parent::render();
       
-    if(!mo_bonusbox__main::getInstance()->isActive())
+    $bonusboxHandler = mo_bonusbox__main::getInstance();
+    if(!$bonusboxHandler->isActive())
     {
       return $return;
     }
     
     //check for Bonusbox-vouchers
-    $basket = $this->getBasket();
-    if($basket->mo_bonusbox__hasBonusboxVoucher())
+    $oxbasket = $this->getBasket();
+    
+    if($voucher = $oxbasket->mo_bonusbox__getBonusboxVoucher())
     {
       //consume/delete coupon
       try 
       {
-      
+        $bonusboxHandler->getInterface()->deleteCoupons($voucher->sVoucherNr);
       }
       catch(Exception $e)
       {
-        
+        //nothing to do here
       }
     }
     
     //transmit basket-items
     try
     {
-      $result = mo_bonusbox__main::getInstance()->getInterface()->createSuccessPages($basket);
-      $this->_aViewData['mo_bonusbox__frame_url'] = $result['url'];
+      $result = $bonusboxHandler->getInterface()->createSuccessPages($oxbasket);
+      $this->_aViewData['mo_bonusbox__iframe_url'] = $result['url'];
     }
     catch (Exception $e)
     {
-      $this->_aViewData['mo_bonusbox__frame_url'] = '';
+      $this->_aViewData['mo_bonusbox__iframe_url'] = '';
     }
     
     return $return;

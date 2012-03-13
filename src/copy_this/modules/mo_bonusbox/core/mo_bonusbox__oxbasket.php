@@ -51,17 +51,17 @@ class mo_bonusbox__oxbasket extends mo_bonusbox__oxbasket_parent
   
   /**
    * iterate through simple (!) vouchers (stdClass) and check for bonusbox-status
-   * @return boolean 
+   * @return stdClass 
    */
-  public function mo_bonusbox__hasBonusboxVoucher()
+  public function mo_bonusbox__getBonusboxVoucher()
   {
     foreach($this->getVouchers() as $voucher)
     {
       if($voucher->mo_bonusbox__is_bonus_voucher)
       {
-        return true;
+        return $voucher;
       }
     }
-    return false;
+    return null;
   }
 }

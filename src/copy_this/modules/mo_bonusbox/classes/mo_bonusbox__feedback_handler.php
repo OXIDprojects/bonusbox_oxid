@@ -79,6 +79,19 @@ class mo_bonusbox__feedback_handler
   }
   
   /**
+   * handle API-call deleteCoupons
+   * 
+   * @param type $result
+   * @return type 
+   */
+  public function handleDeleteCoupons($result)
+  {
+    $result = $this->decodeResult($result);
+
+    return $result;
+  }
+  
+  /**
    * check for errors in response
    *
    * @param type $result
