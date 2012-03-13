@@ -38,7 +38,7 @@ class mo_bonusbox__interface
    *  
    * @return type 
    */
-  public function getBadges($isAdmin)
+  public function getBadges()
   {
     //fetch params
     $params = $this->paramBuilder->buildGetBadges();
@@ -47,6 +47,23 @@ class mo_bonusbox__interface
     $result = $this->client->callService($params);
     
     //handle feedback
-    return $this->feedbackHandler->handleGetBadges($result, $isAdmin);
+    return $this->feedbackHandler->handleGetBadges($result);
+  }
+  
+  /**
+   * handle service getCoupons
+   *  
+   * @return type 
+   */
+  public function getCoupons()
+  {
+    //fetch params
+    $params = $this->paramBuilder->buildGetCoupons();
+    
+    //call service
+    $result = $this->client->callService($params);
+    
+    //handle feedback
+    return $this->feedbackHandler->handleGetCoupons($result);
   }
 }

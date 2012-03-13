@@ -43,6 +43,20 @@ class mo_bonusbox__param_builder
   }
   
   /**
+   * build parameters for getAgreedHandlingCharges
+   * @return string 
+   */
+  public function buildGetCoupons()
+  {
+    $params = array();
+    $params['user_pwd'] = $this->getAuthParameters(true);
+    $params['url'] = self::API_HOST . '/coupons/' . $this->oxConfig->getParameter('voucherNr');
+    $params['request_method'] = 'GET';
+
+    return $params;
+  }
+  
+  /**
    * returns auth-parameters for API-calls
    * @return string 
    */
