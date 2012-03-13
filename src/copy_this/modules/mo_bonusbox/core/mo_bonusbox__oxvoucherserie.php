@@ -5,6 +5,11 @@
  */
 class mo_bonusbox__oxvoucherserie extends mo_bonusbox__oxvoucherserie_parent
 {
+  /**
+   * generate adhoc voucher
+   * @param type $couponCode
+   * @return type 
+   */
   public function mo_bonusbox__generateVoucher($couponCode)
   {
     $voucher = oxNew("oxvoucher");
@@ -23,8 +28,13 @@ class mo_bonusbox__oxvoucherserie extends mo_bonusbox__oxvoucherserie_parent
     return $voucher;
   }
   
+  /**
+   * generate ID - has to be dynamic (e.g. with session-id) if DELETE coupon should fail for any reasons
+   * @param type $couponCode
+   * @return type 
+   */
   protected function mo_bonusbox__generateVoucherIdByCouponCode($couponCode)
   {
-    return md5($this->getId() . $couponCode);
+    return md5($this->getSession()->getId() . $this->getId() . $couponCode);
   }
 }

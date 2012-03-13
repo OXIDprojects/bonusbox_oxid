@@ -100,6 +100,7 @@ class mo_bonusbox__config extends Shop_Config
     $oVoucherseries->oxvoucherseries__oxserienr = new oxField($this->mo_bonusbox__getVoucherSeriesTitle($aBadge['title']));
     $oVoucherseries->oxvoucherseries__oxseriedescription = new oxField($aBadge['benefit']);
     $oVoucherseries->oxvoucherseries__oxenddate = new oxField("2000-01-01 00:00:00");
+    $oVoucherseries->oxvoucherseries__oxallowuseanother = new oxField(1);
     return $oVoucherseries->save();
   }
   

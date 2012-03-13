@@ -33,7 +33,7 @@ class mo_bonusbox__param_builder
   
   /**
    * build parameters for getAgreedHandlingCharges
-   * @return string 
+   * @return array 
    */
   public function buildGetBadges()
   {
@@ -47,7 +47,7 @@ class mo_bonusbox__param_builder
   
   /**
    * build parameters for getAgreedHandlingCharges
-   * @return string 
+   * @return array 
    */
   public function buildGetCoupons()
   {
@@ -59,6 +59,11 @@ class mo_bonusbox__param_builder
     return $this->filterParams($params);
   }
   
+  /**
+   * build parameters for createSuccessPages
+   * @param oxBasket $oxbasket
+   * @return array
+   */
   public function buildCreateSuccessPages(oxBasket $oxbasket)
   {
     $params = array();
@@ -74,6 +79,21 @@ class mo_bonusbox__param_builder
     $postData['currency'] = $this->getCurrencyParameter();
     
     $params['post_data'] = $postData;
+    
+    return $this->filterParams($params);
+  }
+  
+  /**
+   * create parameters for deleteCoupons
+   * @param oxBasket $oxbasket
+   * @return array
+   */
+  public function buildDeleteCoupons($couponCode)
+  {
+    $params = array();
+    $params['user_pwd'] = $this->getAuthParameters(false);
+    $params['url'] = self::API_HOST . '/coupons/' . $couponCode;
+    $params['request_method'] = 'DELETE';
     
     return $this->filterParams($params);
   }
@@ -227,7 +247,7 @@ class mo_bonusbox__param_builder
    * @param oxwrapping $wrapping
    * @param type $artnum
    * @param type $quantity
-   * @return type 
+   * @return mixed 
    */
   protected function getWrappingItem(oxwrapping $wrapping, $artnum, $quantity)
   {
@@ -247,8 +267,8 @@ class mo_bonusbox__param_builder
   
   /**
    * get params for giftcard option
-   * 
-   * @param type $articleData 
+   * @param oxbasket $oxbasket
+   * @return mixed
    */
   protected function getGiftCardItem(oxbasket $oxbasket)
   {
@@ -274,7 +294,8 @@ class mo_bonusbox__param_builder
   
   /**
    * get delivery charge from basket
-   * @param type $articleData 
+   * @param oxBasket $oxbasket
+   * @return boolean 
    */
   protected function getDeliveryChargeItem(oxBasket $oxbasket)
   {
@@ -334,7 +355,7 @@ class mo_bonusbox__param_builder
    * encode data if necessary
    * 
    * @param type $params
-   * @return type 
+   * @return array 
    */
   protected function filterParams($params)
   {
