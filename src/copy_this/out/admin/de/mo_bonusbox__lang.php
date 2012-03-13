@@ -18,5 +18,10 @@ $aLang = array(
 'MO_BONUSBOX__TEST_KEY_PUBLIC_HELP' => 'Public Key',
 'MO_BONUSBOX__TEST_KEY_SECRET' => 'Secret Key (Test)',
 'MO_BONUSBOX__TEST_KEY_SECRET_HELP' => 'Hilfe Secret Key',
-'MO_BONUSBOX__BADGE_INFO_TITLE' => 'Verfügbare Badges',    
+'MO_BONUSBOX__BADGE_INFO_TITLE' => 'Verfügbare Badges',
+'MO_BONUSBOX__BADGE_TITLE' => 'Name:',
+'MO_BONUSBOX__BADGE_BENEFIT' => 'Vergünstigung:',
+'MO_BONUSBOX__COUPONSERIES_ACTIVE' => 'Gutscheinserie aktiv',
+'MO_BONUSBOX__COUPONSERIES_INACTIVE' => 'Gutscheinserie inaktiv',
+'MO_BONUSBOX__COUPONSERIES_EDIT' => 'Gutscheinserie bearbeiten',
 );
