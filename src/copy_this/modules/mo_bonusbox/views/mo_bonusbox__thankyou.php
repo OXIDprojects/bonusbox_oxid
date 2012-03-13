@@ -37,11 +37,11 @@ class mo_bonusbox__thankyou extends mo_bonusbox__thankyou_parent
     try
     {
       $result = mo_bonusbox__main::getInstance()->getInterface()->createSuccessPages($basket);
-      $this->_aViewData['mo_bonusbox__frame_url'] = $result['url'];
+      $this->_aViewData['mo_bonusbox__iframe_url'] = $result['url'];
     }
     catch (Exception $e)
     {
-      $this->_aViewData['mo_bonusbox__frame_url'] = '';
+      $this->_aViewData['mo_bonusbox__iframe_url'] = '';
     }
     
     return $return;

@@ -278,7 +278,7 @@ class mo_bonusbox__param_builder
    */
   protected function getDeliveryChargeItem(oxBasket $oxbasket)
   {
-    if((!$charge = $oxbasket->getCosts('oxdelivery')) || $charge->getNettoPrice())
+    if((!$charge = $oxbasket->getCosts('oxdelivery')) || !$charge->getNettoPrice())
     {
       return false;
     }
