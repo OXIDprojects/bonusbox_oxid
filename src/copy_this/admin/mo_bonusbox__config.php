@@ -69,11 +69,11 @@ class mo_bonusbox__config extends Shop_Config
    */
   public function mo_bonusbox__getAssignedVoucherseries($aBadgeInfo)
   {
-    $sMo_BB_BadgeId = $this->mo_bonusbox__getVoucherSeriesId($aBadgeInfo['id']);
+    $mo_bonusbox__badgeId = $this->mo_bonusbox__getVoucherSeriesId($aBadgeInfo['id']);
 
     $oVoucherseries = oxNew('oxvoucherserie');
     
-    if (!$oVoucherseries->load($sMo_BB_BadgeId))
+    if (!$oVoucherseries->load($mo_bonusbox__badgeId))
     {
       return !$this->mo_bonusbox__generateVoucherseries($aBadgeInfo);
     }
@@ -88,7 +88,7 @@ class mo_bonusbox__config extends Shop_Config
   }
 
   /**
-   * creeate bonusboxvoucherseries
+   * create bonusboxvoucherseries
    * @return type boolean 
    */
   protected function mo_bonusbox__generateVoucherseries($aBadge)
