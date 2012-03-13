@@ -74,7 +74,7 @@ class mo_bonusbox__param_builder
     $postData = array();
     $postData['addresses'] = $this->getUserData();
     $postData['items'] = $this->getItemData($oxbasket);
-    $postData['order_number'] = $oxbasket->getOrderId();
+    $postData['order_number'] = $this->getOrderNoParameter($oxbasket);
     $postData['style_url'] = '';
     $postData['currency'] = $this->getCurrencyParameter();
     
@@ -370,5 +370,18 @@ class mo_bonusbox__param_builder
     }
     
     return $params;
+  }
+  
+  /**
+   * retrieve order-no from basket
+   * @param type $oxbasket
+   * @return type 
+   */
+  protected function getOrderNoParameter($oxbasket)
+  {
+    $oxorder = oxNew('oxorder');
+    $oxorder->load($oxbasket->getOrderId());
+    return $oxbasket->oxorder__oxordernr->value;
+    
   }
 }
