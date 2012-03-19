@@ -31,4 +31,15 @@ class mo_bonusbox__oxvoucher extends mo_bonusbox__oxvoucher_parent
       $this->delete();
     }
   }
+  
+  /**
+   * add isBonusboxVoucher info to simple Object
+   * @extend getSimpleVoucher
+   */
+  public function getSimpleVoucher()
+  {
+    $simpleObject = parent::getSimpleVoucher();
+    $simpleObject->mo_bonusbox__is_bonus_voucher = $this->mo_bonusbox__isBonusboxVoucher();
+    return $simpleObject;
+  }
 }

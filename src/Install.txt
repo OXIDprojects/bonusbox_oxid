@@ -1,0 +1,9 @@
+tpl:
+
+add to thankyou.tpl (e.g. append to "checkout_thankyou_info" block):
+
+[{* mo_bonusbox START *}]
+[{if $mo_bonusbox__iframe_url}]
+  <iframe src="[{$mo_bonusbox__iframe_url}]" width="100%" height="150"></iframe>
+[{/if}]
+[{* mo_bonusbox END *}]

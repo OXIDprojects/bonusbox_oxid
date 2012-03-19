@@ -26,6 +26,10 @@ class mo_bonusbox__config extends Shop_Config
     return $this->_sThisTemplate;
   }
   
+  /**
+   * retrieve badges
+   * @return type array 
+   */
   protected function mo_bonusbox__getBadgeInfo()
   {
     $bonusboxHandler = mo_bonusbox__main::getInstance();
@@ -60,24 +64,27 @@ class mo_bonusbox__config extends Shop_Config
   }
   
   /**
-   * check whether bonusboxvoucherseries already exists
-   * @return type bolean 
+   * check whether bonusboxvoucherseries already exists and create if not
+   * @return type boolean 
    */
   public function mo_bonusbox__getAssignedVoucherseries($aBadgeInfo)
   {
-    $bonusboxHandler = mo_bonusbox__main::getInstance();
-    $sMo_BB_BadgeId = $bonusboxHandler->getHelper()->getVoucherSeriesIdByBadgeId($aBadgeInfo['id']);
+    $sMo_BB_BadgeId = $this->mo_bonusbox__getVoucherSeriesId($aBadgeInfo['id']);
 
-    $voucherseries = oxNew('oxvoucherserie');
-    if ($voucherseries->load($sMo_BB_BadgeId))
+    $oVoucherseries = oxNew('oxvoucherserie');
+    
+    if (!$oVoucherseries->load($sMo_BB_BadgeId))
     {
-      // sync data
-      return true;
+      return !$this->mo_bonusbox__generateVoucherseries($aBadgeInfo);
     }
-    else
-    {
-      return $this->mo_bonusbox__generateVoucherseries($aBadgeInfo);
-    }
+      
+    $sDefTimeStamp = oxUtilsDate::getInstance()->formatDBDate( '-' );
+    if(strtotime( $oVoucherseries->oxvoucherseries__oxenddate->value ) > time() || !$oVoucherseries->oxvoucherseries__oxenddate->value || $oVoucherseries->oxvoucherseries__oxenddate->value == $sDefTimeStamp)
+      {  
+        return true;
+      }
+      
+    return false;   
   }
 
   /**
@@ -88,12 +95,32 @@ class mo_bonusbox__config extends Shop_Config
   {
     $oVoucherseries = oxNew('oxvoucherserie');
 
-    $bonusboxHandler = mo_bonusbox__main::getInstance();
-
-    $oVoucherseries->setId($bonusboxHandler->getHelper()->getVoucherSeriesIdByBadgeId($aBadge['id']));
+    $oVoucherseries->setId($this->mo_bonusbox__getVoucherSeriesId($aBadge['id']));
     $oVoucherseries->oxvoucherseries__oxvoucherserieid = new oxField($oVoucherseries->getId());
-    $oVoucherseries->oxvoucherseries__oxserienr = new oxField($bonusboxHandler->getHelper()->getVoucherSeriesTitleByBadgeTitle($aBadge['title']));
+    $oVoucherseries->oxvoucherseries__oxserienr = new oxField($this->mo_bonusbox__getVoucherSeriesTitle($aBadge['title']));
     $oVoucherseries->oxvoucherseries__oxseriedescription = new oxField($aBadge['benefit']);
+    $oVoucherseries->oxvoucherseries__oxenddate = new oxField("2000-01-01 00:00:00");
+    $oVoucherseries->oxvoucherseries__oxallowuseanother = new oxField(1);
     return $oVoucherseries->save();
+  }
+  
+  /**
+   * build VoucherSeriesID
+   * @return type string
+   */
+  public function mo_bonusbox__getVoucherSeriesId($sBadgeId)
+  {
+    $bonusboxHandler = mo_bonusbox__main::getInstance();
+    return $bonusboxHandler->getHelper()->getVoucherSeriesIdByBadgeId($sBadgeId);
+  }
+  
+  /**
+   * build VoucherSeriesTitle
+   * @return type string
+   */
+  public function mo_bonusbox__getVoucherSeriesTitle($sBadgeTitle)
+  {
+    $bonusboxHandler = mo_bonusbox__main::getInstance();
+    return $bonusboxHandler->getHelper()->getVoucherSeriesTitleByBadgeTitle($sBadgeTitle);
   }
 }

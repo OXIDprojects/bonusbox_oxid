@@ -120,7 +120,7 @@ class mo_bonusbox__main
   {
     if(is_null($this->client))
     {
-      $this->client = new mo_bonusbox__client($this->getBonusboxConfig(), $this->getLogger());
+      $this->client = new mo_bonusbox__client($this->getLogger());
     }
     return $this->client;
   }

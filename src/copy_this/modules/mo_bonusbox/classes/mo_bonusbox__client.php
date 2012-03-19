@@ -15,9 +15,8 @@ class mo_bonusbox__client
    * 
    * @param mo_bonusbox__logger $logger 
    */
-  public function __construct($bonusboxConfig, mo_bonusbox__logger $logger)
+  public function __construct(mo_bonusbox__logger $logger)
   {
-    $this->bonusboxConfig = $bonusboxConfig;
     $this->logger = $logger;
   }
   
@@ -29,8 +28,6 @@ class mo_bonusbox__client
    */
   public function callService($params)
   {
-    $params = $this->filterParams($params);
-    
     $this->logger->logExecution($params, true);
     
     $ch = curl_init();
@@ -44,7 +41,7 @@ class mo_bonusbox__client
     if(!empty($params['post_data']))
     {
       curl_setopt($ch, CURLOPT_POST, true);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params['post_data']));
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $params['post_data']);
     }
     
     curl_setopt($ch, CURLOPT_USERPWD, $params['user_pwd']);
@@ -58,21 +55,6 @@ class mo_bonusbox__client
     
     $this->logger->logExecution($result);
     return $result;
-  }
-  
-  /**
-   * encode data if necessary
-   * 
-   * @param type $params
-   * @return type 
-   */
-  protected function filterParams($params)
-  {
-    if(!empty($this->bonusboxConfig['encode_utf8']))
-    {
-      $params = array_map('utf8_encode', $params);
-    }
-    return $params;
   }
   
   /**

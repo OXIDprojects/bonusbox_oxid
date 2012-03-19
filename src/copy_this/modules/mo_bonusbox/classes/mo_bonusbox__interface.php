@@ -66,4 +66,38 @@ class mo_bonusbox__interface
     //handle feedback
     return $this->feedbackHandler->handleGetCoupons($result);
   }
+  
+  /**
+   * handle service createSuccessPages
+   * @param oxBasket $oxbasket
+   * @return type 
+   */
+  public function createSuccessPages(oxBasket $oxbasket)
+  {
+    //fetch params
+    $params = $this->paramBuilder->buildCreateSuccessPages($oxbasket);
+
+    //call service
+    $result = $this->client->callService($params);
+
+    //handle feedback
+    return $this->feedbackHandler->handleCreateSuccessPages($result);
+  }
+  
+  /**
+   * handle service deleteCoupons
+   * @param string $coupon
+   * @return type 
+   */
+  public function deleteCoupons($couponCode)
+  {
+    //fetch params
+    $params = $this->paramBuilder->buildDeleteCoupons($couponCode);
+
+    //call service
+    $result = $this->client->callService($params);
+
+    //handle feedback
+    return $this->feedbackHandler->handleDeleteCoupons($result);
+  }
 }
