@@ -37,7 +37,7 @@ class mo_bonusbox__thankyou extends mo_bonusbox__thankyou_parent
     return $return;
   }
   
-  protected function mo_bonusbox__deleteForBonusboxVoucher($bonusboxHandler, $oxbasket)
+  protected function mo_bonusbox__deleteBonusboxVoucher($bonusboxHandler, $oxbasket)
   {
     if ($voucher = $oxbasket->mo_bonusbox__getBonusboxVoucher())
     {
