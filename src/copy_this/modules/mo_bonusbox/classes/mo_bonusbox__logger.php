@@ -93,7 +93,7 @@ class mo_bonusbox__logger
    */
   protected function logRotation($file)
   {
-    if(class_exists('ZipArchive') && filesize($file) > 10000000) //~10MB
+    if($this->isRotationActive($file))
     {
       $backupLogFile = preg_replace('#^(.*)?\.([a-z]+)$#', '$1_' . time() . '_' . uniqid() . '.$2.zip', strtolower($file));
       
@@ -104,6 +104,11 @@ class mo_bonusbox__logger
       
       unlink($file);
     }
+  }
+  
+  protected function isRotationActive($file)
+  {
+    return class_exists('ZipArchive') && filesize($file) > 10000000; //~10MB
   }
 
 }

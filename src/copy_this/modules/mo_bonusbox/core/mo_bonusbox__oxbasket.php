@@ -24,6 +24,7 @@ class mo_bonusbox__oxbasket extends mo_bonusbox__oxbasket_parent
       return parent::addVoucher($sVoucherId);
     }
     
+    //fetch available Bonusbox bagdes
     try
     {
       $response = $bonusboxHandler->getInterface()->getCoupons();
@@ -33,11 +34,9 @@ class mo_bonusbox__oxbasket extends mo_bonusbox__oxbasket_parent
       return parent::addVoucher($sVoucherId);
     }
     
-    if(!$voucherSeriesId = $bonusboxHandler->getHelper()->getVoucherSeriesIdByGetCouponResponse($response))
-    {
-      return parent::addVoucher($sVoucherId);
-    }
-
+    //generate voucherSeries ID
+    $voucherSeriesId = $bonusboxHandler->getHelper()->getVoucherSeriesIdByGetCouponResponse($response);
+    
     $voucherSeries = oxNew('oxVoucherSerie');
     if(!$voucherSeries->load($voucherSeriesId))
     {

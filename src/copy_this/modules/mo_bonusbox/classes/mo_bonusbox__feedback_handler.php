@@ -118,11 +118,6 @@ class mo_bonusbox__feedback_handler
       return $result;
     }
     
-    if(!empty($result[$index]))
-    {
-      return $result;
-    }
-    
     foreach($result as $key => $entry)
     {
       $result[$index][] = $entry[$index];
