@@ -19,21 +19,9 @@ class mo_bonusbox__thankyou extends mo_bonusbox__thankyou_parent
       return $return;
     }
     
-    //check for Bonusbox-vouchers
+    //check for Bonusbox-voucher
     $oxbasket = $this->getBasket();
-    
-    if($voucher = $oxbasket->mo_bonusbox__getBonusboxVoucher())
-    {
-      //consume/delete coupon
-      try 
-      {
-        $bonusboxHandler->getInterface()->deleteCoupons($voucher->sVoucherNr);
-      }
-      catch(Exception $e)
-      {
-        //nothing to do here
-      }
-    }
+    $this->mo_bonusbox__deleteBonusboxVoucher($bonusboxHandler, $oxbasket);
     
     //transmit basket-items
     try
@@ -47,5 +35,21 @@ class mo_bonusbox__thankyou extends mo_bonusbox__thankyou_parent
     }
     
     return $return;
+  }
+  
+  protected function mo_bonusbox__deleteForBonusboxVoucher($bonusboxHandler, $oxbasket)
+  {
+    if ($voucher = $oxbasket->mo_bonusbox__getBonusboxVoucher())
+    {
+      //consume/delete coupon
+      try
+      {
+        $bonusboxHandler->getInterface()->deleteCoupons($voucher->sVoucherNr);
+      }
+      catch (Exception $e)
+      {
+        //nothing to do here
+      }
+    }
   }
 }
