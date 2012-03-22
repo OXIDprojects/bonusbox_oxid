@@ -8,6 +8,12 @@
  */
 class mo_bonusbox__main
 {
+  /**
+   * configuration
+   */
+  const SHOP_SOFTWARE = 'oxid';
+  const CLIENT_INTERFACE = 'curl';
+  
   static protected $instance = null;
   
   protected $logger = null;
@@ -54,7 +60,6 @@ class mo_bonusbox__main
    */
   protected function __construct()
   {
-    $this->oxSession = oxSession::getInstance();
     $this->oxConfig = oxConfig::getInstance();
     $this->bonusboxConfig = $this->oxConfig->getShopConfVar('mo_bonusbox__config');
   }
@@ -92,7 +97,8 @@ class mo_bonusbox__main
   {
     if(is_null($this->paramBuilder))
     {
-      $this->paramBuilder = new mo_bonusbox__param_builder($this->oxConfig, $this->oxSession, $this->getBonusboxConfig(), $this->getLogger(), $this->isLiveMode());
+      $builderClass = 'mo_bonusbox__param_builder__' . self::SHOP_SOFTWARE;
+      $this->paramBuilder = new $builderClass($this->oxConfig, $this->getBonusboxConfig(), $this->getLogger(), $this->isLiveMode());
     }
     return $this->paramBuilder;
   }
@@ -120,7 +126,8 @@ class mo_bonusbox__main
   {
     if(is_null($this->client))
     {
-      $this->client = new mo_bonusbox__client($this->getLogger());
+      $clientClass = 'mo_bonusbox__client__' . self::CLIENT_INTERFACE;
+      $this->client = new $clientClass($this->getLogger());
     }
     return $this->client;
   }
@@ -147,7 +154,8 @@ class mo_bonusbox__main
   {
     if (is_null($this->helper))
     {
-      $this->helper = new mo_bonusbox__helper();
+      $helperClass = 'mo_bonusbox__helper__' . self::SHOP_SOFTWARE;
+      $this->helper = new $helperClass();
     }
     return $this->helper;
   }
